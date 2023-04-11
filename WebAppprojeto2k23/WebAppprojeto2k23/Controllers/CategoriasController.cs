@@ -24,5 +24,17 @@ namespace WebAppprojeto2k23.Controllers
             return View(categorias);
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Categoria categoria)
+        {
+            categorias.Add(categoria);
+            categoria.CategoriaId = categorias.Select(m => m.CategoriaId).Max() + 1;
+            return RedirectToAction("Index");
+        }
+        public ActionResult Edit(long id)
+        {
+            return View(categorias.Where(m => m.CategoriaId == id).First());
+        }
     }
 }
