@@ -1,49 +1,33 @@
 ﻿@model WebApplication1.Models.Fabricante
-@model IEnumerable<Projeto01.Models.Produto>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        Relação de PRODUTOS registrados para o fabricante
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProdutoId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>Categoria</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProdutoId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Categoria.Nome)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="panel-footer panel-info">
-    </div>
-</div>
- @model WebApplication1.Models.Fabricante
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Visualizando detalhes de um FABRICANTE";
 }
 <div class="panel panel-primary">
-    ...
+    <div class="panel-heading">
+        Visualizando detalhes de um FABRICANTE
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome)
+            <br />
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-user"></i>
+                </span>
+                @Html.EditorFor(model => model.Nome, new
+                {
+                    htmlAttributes =
+                new { @class = "form-control", disabled = "disabled" }
+                })
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer panel-info">
+        @Html.ActionLink("Alterar", "Edit", new { id = Model.FabricanteId },
+        new { @class = "btn btn-info" })
+        @Html.ActionLink("Retornar para a listagem", "Index", null,
+        new { @class = "btn btn-info" })
+    </div>
 </div>
 @Html.Partial("~/Views/Produtos/_PorFabricante.cshtml", Model.Produtos.ToList())
