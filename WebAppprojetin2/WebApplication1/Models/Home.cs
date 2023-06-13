@@ -9,5 +9,7 @@ namespace WebApplication1.Models
     {
         public IEnumerable<Fabricante> fabi;
         public IEnumerable<Categoria> categ;
+        public IEnumerable<Produto> produtos;
+        public string filtro;
     }
 }
